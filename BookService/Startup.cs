@@ -1,4 +1,5 @@
 using BookService.Data;
+using BookService.RabbitMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,6 +24,7 @@ namespace BookService
         {
             services.AddDbContext<BookContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
+            services.AddHostedService<RabbitMqOrderCreatedEventListener>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

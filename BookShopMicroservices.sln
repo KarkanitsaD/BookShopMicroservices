@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerService", "CustomerService\CustomerService.csproj", "{416C5496-D741-41B6-AF10-B82A07856649}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerService", "CustomerService\CustomerService.csproj", "{416C5496-D741-41B6-AF10-B82A07856649}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookService", "BookService\BookService.csproj", "{AA235743-CDD6-4933-A15C-7388B781BEDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookService", "BookService\BookService.csproj", "{AA235743-CDD6-4933-A15C-7388B781BEDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderService", "OrderService\OrderService.csproj", "{6D58C193-1A28-45F3-AAD7-CF841661B6C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{6D58C193-1A28-45F3-AAD7-CF841661B6C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionService", "ExceptionService\ExceptionService.csproj", "{530B264F-EEFE-496E-9F85-6288C2786909}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{6D58C193-1A28-45F3-AAD7-CF841661B6C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D58C193-1A28-45F3-AAD7-CF841661B6C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D58C193-1A28-45F3-AAD7-CF841661B6C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{530B264F-EEFE-496E-9F85-6288C2786909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{530B264F-EEFE-496E-9F85-6288C2786909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{530B264F-EEFE-496E-9F85-6288C2786909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{530B264F-EEFE-496E-9F85-6288C2786909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

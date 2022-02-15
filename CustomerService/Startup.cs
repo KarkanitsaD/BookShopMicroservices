@@ -1,4 +1,6 @@
+using System;
 using CustomerService.Data;
+using CustomerService.RabbitMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Polly;
 
 namespace CustomerService
 {
@@ -21,8 +24,11 @@ namespace CustomerService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpClient("helloApi", c => { c.BaseAddress = new Uri("http://localhost:3000"); })
+                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(2, TimeSpan.FromSeconds(30)));
             services.AddDbContext<CustomerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
+            services.AddHostedService<BookReservedByUserEventListener>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
