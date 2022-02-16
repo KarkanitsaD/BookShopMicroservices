@@ -25,6 +25,7 @@ namespace BookService
             services.AddDbContext<BookContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
             services.AddHostedService<RabbitMqOrderCreatedEventListener>();
+            services.AddHostedService<PaymentFailedEventListener>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

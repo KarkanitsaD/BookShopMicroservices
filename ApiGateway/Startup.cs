@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using OrderService.Data;
-using OrderService.RabbitMq;
+using Ocelot.Cache.CacheManager;
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
 
-namespace OrderService
+namespace ApiGateway
 {
     public class Startup
     {
@@ -22,15 +22,11 @@ namespace OrderService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-            services.AddScoped<RabbitMqService>();
-            services.AddDbContext<OrderContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
-            services.AddHostedService<ReservationFailedEventListener>();
+            services.AddOcelot().AddCacheManager(settings => settings.WithDictionaryHandle());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrderService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiGateway", Version = "v1" });
             });
         }
 
@@ -41,7 +37,7 @@ namespace OrderService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderService v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiGateway v1"));
             }
 
             app.UseHttpsRedirection();
@@ -54,6 +50,7 @@ namespace OrderService
             {
                 endpoints.MapControllers();
             });
+            app.UseOcelot().Wait();
         }
     }
 }

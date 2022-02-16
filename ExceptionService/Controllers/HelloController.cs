@@ -13,13 +13,9 @@ namespace ExceptionService.Controllers
             var i = new Random().Next(1, 10);
             if (i < 5)
             {
-                HttpContext.Response.StatusCode = 418;
                 throw new Exception();
             }
-            else
-            {
-                return Ok("Hello World!");
-            }
+            return Ok("Hello World!");
         }
     }
 }

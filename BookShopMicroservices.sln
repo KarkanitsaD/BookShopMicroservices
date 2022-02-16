@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookService", "BookService\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "OrderService\OrderService.csproj", "{6D58C193-1A28-45F3-AAD7-CF841661B6C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExceptionService", "ExceptionService\ExceptionService.csproj", "{530B264F-EEFE-496E-9F85-6288C2786909}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionService", "ExceptionService\ExceptionService.csproj", "{530B264F-EEFE-496E-9F85-6288C2786909}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{86D51F61-9BD9-4614-B4DB-1687B80ECDBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{530B264F-EEFE-496E-9F85-6288C2786909}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{530B264F-EEFE-496E-9F85-6288C2786909}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{530B264F-EEFE-496E-9F85-6288C2786909}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86D51F61-9BD9-4614-B4DB-1687B80ECDBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86D51F61-9BD9-4614-B4DB-1687B80ECDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86D51F61-9BD9-4614-B4DB-1687B80ECDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86D51F61-9BD9-4614-B4DB-1687B80ECDBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

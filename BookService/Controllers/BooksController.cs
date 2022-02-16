@@ -73,10 +73,10 @@ namespace BookService.Controllers
                 await transaction.CommitAsync();
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 await transaction.RollbackAsync();
-                throw e;
+                return BadRequest();
             }
         }
     }
