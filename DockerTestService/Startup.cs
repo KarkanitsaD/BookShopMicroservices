@@ -1,18 +1,18 @@
-using System;
-using CustomerService.Controllers;
-using CustomerService.Data;
-using CustomerService.RabbitMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using Polly;
-using Refit;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CustomerService
+namespace DockerTestService
 {
     public class Startup
     {
@@ -26,20 +26,11 @@ namespace CustomerService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient("helloApi", c => { c.BaseAddress = new Uri("http://localhost:3000"); })
-                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(2, TimeSpan.FromSeconds(30)));
 
-            services.AddRefitClient<IBookApi>()
-                .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:7000"))
-                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(2, TimeSpan.FromSeconds(5)));
-
-            services.AddDbContext<CustomerContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
-            services.AddHostedService<BookReservedByUserEventListener>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CustomerService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DockerTestService", Version = "v1" });
             });
         }
 
@@ -50,10 +41,13 @@ namespace CustomerService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CustomerService v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DockerTestService v1"));
             }
 
-            app.UseHttpsRedirection();
+            if (env.IsDevelopment())
+            {
+                app.UseHttpsRedirection();
+            }
 
             app.UseRouting();
 

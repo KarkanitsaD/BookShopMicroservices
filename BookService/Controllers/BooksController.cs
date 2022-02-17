@@ -42,6 +42,14 @@ namespace BookService.Controllers
             return Ok(entity.Entity.Id);
         }
 
+        [HttpGet]
+        [Route("exception")]
+        public async Task Exception()
+        {
+            throw new Exception("Lalala");
+        }
+
+
         [HttpPost]
         [Route("{id:int}/putAway/{count:int}")]
         public async Task<IActionResult> PutAwayBooks([FromRoute] int id, [FromRoute] int count)

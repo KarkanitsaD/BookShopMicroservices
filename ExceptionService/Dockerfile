@@ -10,14 +10,14 @@ FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 #we in src
 WORKDIR /src
 #copy csproj to current location
-COPY ["OrderService.csproj", "./"]
+COPY ["ExceptionService.csproj", "./"]
 #restore
-RUN dotnet restore "OrderService.csproj"
+RUN dotnet restore "ExceptionService.csproj"
 #copy all other files that we needed
 COPY . .
-RUN dotnet publish "OrderService.csproj" -c Release -o /app/publish
+RUN dotnet publish "ExceptionService.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
-ENTRYPOINT ["dotnet", "OrderService.dll"]
+ENTRYPOINT ["dotnet", "ExceptionService.dll"]
