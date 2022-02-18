@@ -1,8 +1,11 @@
+using Azure.Storage.Blobs;
+using BookService.Business;
 using BookService.Data;
 using BookService.RabbitMq;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Azure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +29,11 @@ namespace BookService
                 options.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
             services.AddHostedService<RabbitMqOrderCreatedEventListener>();
             services.AddHostedService<PaymentFailedEventListener>();
+
+            services.AddSingleton(config =>
+                new BlobServiceClient(Configuration.GetValue<string>("AzureBlobStorageConnectionString")));
+            services.AddSingleton<IBlobService, BlobService>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
