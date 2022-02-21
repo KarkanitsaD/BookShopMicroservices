@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionService", "Excepti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "ApiGateway\ApiGateway.csproj", "{86D51F61-9BD9-4614-B4DB-1687B80ECDBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerTestService", "DockerTestService\DockerTestService.csproj", "{DC35B2F9-AE23-4BD5-B75B-0EC8699780FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerTestService", "DockerTestService\DockerTestService.csproj", "{DC35B2F9-AE23-4BD5-B75B-0EC8699780FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

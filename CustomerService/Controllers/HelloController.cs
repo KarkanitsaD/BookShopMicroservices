@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,7 @@ namespace CustomerService.Controllers
         {
             var httpClient = _httpClientFactory.CreateClient("helloApi");
             using var response = await httpClient.GetAsync("http://localhost:3000/api/hello");
+            Console.WriteLine("Error only now!");
             return Ok(await response.Content.ReadAsByteArrayAsync());
         }
 
@@ -59,8 +61,8 @@ namespace CustomerService.Controllers
         public async Task GetException()
         {
             await _booksApi.GetException();
+            Console.WriteLine("Error only after 5 tries!");   
         }
-
     }
 
 

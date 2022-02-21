@@ -12,7 +12,6 @@ namespace ExceptionService.Controllers
         {
             Console.WriteLine("Hello Get!");
             throw new Exception();
-            
         }
     }
 }

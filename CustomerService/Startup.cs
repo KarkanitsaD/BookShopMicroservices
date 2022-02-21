@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using CustomerService.Controllers;
 using CustomerService.Data;
 using CustomerService.RabbitMq;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Polly;
+using Polly.Extensions.Http;
 using Refit;
 
 namespace CustomerService
@@ -27,8 +29,7 @@ namespace CustomerService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHttpClient("helloApi", c => { c.BaseAddress = new Uri("http://localhost:3000"); })
-                .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(2, TimeSpan.FromSeconds(30)));
-
+                .AddTransientHttpErrorPolicy(p => GetRetryPolicy());
             services.AddRefitClient<IBookApi>()
                 .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:7000"))
                 .AddTransientHttpErrorPolicy(p => p.CircuitBreakerAsync(2, TimeSpan.FromSeconds(5)));
@@ -63,6 +64,13 @@ namespace CustomerService
             {
                 endpoints.MapControllers();
             });
+        }
+
+        static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
+        {
+            return HttpPolicyExtensions
+                .HandleTransientHttpError()
+                .WaitAndRetryAsync(4, retryAttempt => TimeSpan.FromSeconds(3));
         }
     }
 }
